@@ -20,18 +20,15 @@
             position: absolute;
             width: 100vw;
             height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
         video {
-            width: 100vh; /* Adjust width to fit rotated video */
-            height: 100vw;
-            object-fit: contain; /* Maintains correct aspect ratio */
+            width: 100vw;
+            height: 100vh;
+            object-fit: cover; /* Fills the screen without distortion */
             background-color: black;
-            transform: rotate(90deg); /* Rotate video to landscape */
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform-origin: center;
-            translate: -50% -50%; /* Center video properly */
         }
         #playButton {
             padding: 15px 30px;
@@ -58,24 +55,11 @@
     <script>
         function playVideo() {
             document.getElementById('playButton').style.display = 'none'; // Hide button
-            document.getElementById('videoContainer').style.display = 'block'; // Show video
+            document.getElementById('videoContainer').style.display = 'flex'; // Show video
             let video = document.getElementById('surpriseVideo');
             video.muted = false; // Enable sound
             video.play(); // Start playing the video
         }
-
-        // Detect screen orientation and adjust rotation
-        function adjustVideoOrientation() {
-            let video = document.getElementById('surpriseVideo');
-            if (window.innerWidth < window.innerHeight) { // Portrait mode
-                video.style.transform = "rotate(90deg)"; // Rotate to landscape
-            } else { // Landscape mode
-                video.style.transform = "rotate(0deg)"; // Keep normal
-            }
-        }
-
-        window.addEventListener("resize", adjustVideoOrientation);
-        window.addEventListener("load", adjustVideoOrientation);
     </script>
 
 </body>
